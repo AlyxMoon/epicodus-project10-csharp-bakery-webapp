@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bakery.Models;
 
@@ -41,6 +42,21 @@ namespace Bakery.Tests
       Assert.AreEqual(1, vendor1.Id);
       Assert.AreEqual(2, vendor2.Id);
       Assert.AreEqual(3, vendor3.Id);
+    }
+
+    [TestMethod]
+    public void AddOrder_CreatesOrderAndAddsItToTheList_ReturnsOrder ()
+    {
+      Vendor vendor = new();
+      Order order = vendor.AddOrder("Test Order", "description here");
+
+      Assert.AreEqual("Test Order", order.Title);
+      Assert.AreEqual("description here", order.Description);
+
+      CollectionAssert.AreEqual(
+        new List<Order> { order },
+        vendor.Orders
+      );
     }
   }
 }
