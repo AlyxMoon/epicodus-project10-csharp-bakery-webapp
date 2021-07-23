@@ -14,5 +14,29 @@ namespace Bakery.Models
       Orders = new();
       Vendors = new();
     }
+
+    public Vendor CreateVendor (string title, string description)
+    {
+      Vendor vendor = new(title, description);
+      Vendors.Add(vendor);
+      return vendor;
+    }
+
+    public Vendor GetVendor (int id)
+    {
+      foreach (Vendor vendor in Vendors)
+      {
+        if (vendor.Id == id) return vendor;
+      }
+
+      return null;
+    }
+
+    public Vendor DeleteVendor (int id)
+    {
+      Vendor vendor = GetVendor(id);
+      Vendors.Remove(vendor);
+      return vendor;
+    }
   }
 }
