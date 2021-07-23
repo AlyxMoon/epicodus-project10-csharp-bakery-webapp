@@ -5,8 +5,13 @@ using Bakery.Models;
 namespace Bakery.Tests
 {
   [TestClass]
-  public class OrderTests
+  public class OrderTests : IDisposable
   {
+    public void Dispose ()
+    {
+      Order.ResetIdCount();
+    }
+
     [TestMethod]
     public void Constructor_InitializesWithCorrectValues ()
     {
@@ -35,9 +40,9 @@ namespace Bakery.Tests
       Order order2 = new();
       Order order3 = new();
 
-      Assert.AreEqual(1, order1);
-      Assert.AreEqual(2, order1);
-      Assert.AreEqual(3, order1);
+      Assert.AreEqual(1, order1.Id);
+      Assert.AreEqual(2, order2.Id);
+      Assert.AreEqual(3, order3.Id);
     }
   }
 }
