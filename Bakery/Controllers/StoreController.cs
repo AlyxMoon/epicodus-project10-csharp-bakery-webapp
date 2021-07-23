@@ -21,7 +21,7 @@ namespace Bakery.Controllers
     }
 
     [HttpGet("vendors/new")]
-    public ActionResult ShowCreateVendor (int vendorId)
+    public ActionResult ShowCreateVendor ()
     {
       return View();
     }
@@ -33,9 +33,10 @@ namespace Bakery.Controllers
     }
 
     [HttpPost("vendors")]
-    public ActionResult CreateVendor (Vendor vendor)
+    public ActionResult CreateVendor (string name, string description)
     {
-      return View("Index", BakeryStore);
+      BakeryStore.CreateVendor(name, description);
+      return RedirectToAction("ShowVendors");
     }
 
     [HttpPost("vendors/{vendorId}/delete")]
