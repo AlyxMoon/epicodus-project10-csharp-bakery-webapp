@@ -58,5 +58,30 @@ namespace Bakery.Tests
         vendor.Orders
       );
     }
+
+    [TestMethod]
+    public void GetOrder_FindsAndReturnsOrderById_ReturnsCorrectOrder ()
+    {
+      Vendor vendor = new();
+      vendor.AddOrder("Test Order", "description here");
+      Order order2 = vendor.AddOrder("Test Order 2", "other description");
+      vendor.AddOrder("Test Order 3", "some other description");
+
+      Assert.AreEqual(
+        order2,
+        vendor.GetOrder(2)
+      );
+    }
+
+    [TestMethod]
+    public void GetOrder_FindsAndReturnsOrderById_ReturnsNullIfNotFound ()
+    {
+      Vendor vendor = new();
+      vendor.AddOrder("Test Order", "description here");
+      vendor.AddOrder("Test Order 2", "other description");
+      vendor.AddOrder("Test Order 3", "some other description");
+
+      Assert.IsNull(vendor.GetOrder(4));
+    }
   }
 }
