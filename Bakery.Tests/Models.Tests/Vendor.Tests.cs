@@ -88,5 +88,49 @@ namespace Bakery.Tests
 
       Assert.IsNull(vendor.GetOrder(100));
     }
+
+    [TestMethod]
+    public void DeleteOrder_FindsAndDeletesOrderById_RemovesOrder ()
+    {
+      Vendor vendor = new();
+      Order order1 = vendor.AddOrder("Test Order 1", "description here");
+      Order order2 = vendor.AddOrder("Test Order 2", "other description");
+      Order order3 = vendor.AddOrder("Test Order 3", "some other description");
+
+      CollectionAssert.AreEqual(
+        new List<Order> { order1, order2, order3 },
+        vendor.Orders
+      );
+
+      vendor.DeleteOrder(order2.Id);
+      CollectionAssert.AreEqual(
+        new List<Order> { order1, order3 },
+        vendor.Orders
+      );
+
+      vendor.DeleteOrder(order3.Id);
+      CollectionAssert.AreEqual(
+        new List<Order> { order1 },
+        vendor.Orders
+      );
+    }
+
+    [TestMethod]
+    public void DeleteOrder_FindsAndDeletesOrderById_DoesNothingIfNotFound ()
+    {
+      Vendor vendor = new();
+      Order order1 = vendor.AddOrder("Test Order 1", "description here");
+
+      CollectionAssert.AreEqual(
+        new List<Order> { order1 },
+        vendor.Orders
+      );
+
+      vendor.DeleteOrder(410321);
+      CollectionAssert.AreEqual(
+        new List<Order> { order1, },
+        vendor.Orders
+      );
+    }
   }
 }
