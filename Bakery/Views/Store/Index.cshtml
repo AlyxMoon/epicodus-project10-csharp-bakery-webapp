@@ -1,0 +1,25 @@
+@using Bakery.Models
+@model Store
+@{
+  Layout = "_Layout";
+}
+
+<h1>Store Info Tracking</h1>
+
+@if (Model.Vendors.Count == 0)
+{
+  <p>There are no vendors yet.</p>
+}
+else
+{
+  <p>Vendors, yay!</p>
+}
+
+@if (Model.Orders.Count == 0)
+{
+  <p>There are no orders yet.</p>
+}
+else
+{
+  <p>Orders, yay!</p>
+}
