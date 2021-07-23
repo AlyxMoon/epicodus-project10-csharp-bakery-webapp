@@ -27,5 +27,17 @@ namespace Bakery.Tests
       Assert.AreEqual("Test Order", order.Title);
       Assert.AreEqual("Test Description", order.Description);
     }
+
+    [TestMethod]
+    public void Constructor_ShouldHaveAutoIncrementingId ()
+    {
+      Order order1 = new();
+      Order order2 = new();
+      Order order3 = new();
+
+      Assert.AreEqual(1, order1);
+      Assert.AreEqual(2, order1);
+      Assert.AreEqual(3, order1);
+    }
   }
 }
