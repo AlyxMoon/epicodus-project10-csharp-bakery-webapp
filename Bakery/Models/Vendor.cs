@@ -32,6 +32,11 @@ namespace Bakery.Models
 
     public Order GetOrder (int id)
     {
+      foreach (Order order in Orders)
+      {
+        if (order.Id == id) return order;
+      }
+
       return null;
     }
   }

@@ -11,6 +11,7 @@ namespace Bakery.Tests
     public void Dispose ()
     {
       Vendor.ResetIdCount();
+      Order.ResetIdCount();
     }
 
     [TestMethod]
@@ -67,9 +68,13 @@ namespace Bakery.Tests
       Order order2 = vendor.AddOrder("Test Order 2", "other description");
       vendor.AddOrder("Test Order 3", "some other description");
 
-      Assert.AreEqual(
+      Console.WriteLine(vendor.GetOrder(2).Id);
+      Console.WriteLine(vendor.GetOrder(2).Title);
+      Console.WriteLine(vendor.GetOrder(2).Description);
+
+      Assert.AreSame(
         order2,
-        vendor.GetOrder(2)
+        vendor.GetOrder(order2.Id)
       );
     }
 
@@ -81,7 +86,7 @@ namespace Bakery.Tests
       vendor.AddOrder("Test Order 2", "other description");
       vendor.AddOrder("Test Order 3", "some other description");
 
-      Assert.IsNull(vendor.GetOrder(4));
+      Assert.IsNull(vendor.GetOrder(100));
     }
   }
 }
