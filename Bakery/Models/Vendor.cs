@@ -42,15 +42,9 @@ namespace Bakery.Models
 
     public Order DeleteOrder (int id)
     {
-      foreach (Order order in Orders)
-      {
-        if (order.Id != id) continue;
-
-        Orders.Remove(order);
-        return order;
-      }
-
-      return null;
+      Order order = GetOrder(id);
+      Orders.Remove(order);
+      return order;
     }
   }
 }
