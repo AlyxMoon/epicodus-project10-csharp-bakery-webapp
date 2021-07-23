@@ -39,5 +39,18 @@ namespace Bakery.Models
 
       return null;
     }
+
+    public Order DeleteOrder (int id)
+    {
+      foreach (Order order in Orders)
+      {
+        if (order.Id != id) continue;
+
+        Orders.Remove(order);
+        return order;
+      }
+
+      return null;
+    }
   }
 }

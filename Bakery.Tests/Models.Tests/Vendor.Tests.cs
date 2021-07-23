@@ -102,13 +102,17 @@ namespace Bakery.Tests
         vendor.Orders
       );
 
-      vendor.DeleteOrder(order2.Id);
+      Order deleted1 = vendor.DeleteOrder(order2.Id);
+      
+      Assert.AreSame(order2, deleted1);
       CollectionAssert.AreEqual(
         new List<Order> { order1, order3 },
         vendor.Orders
       );
 
-      vendor.DeleteOrder(order3.Id);
+      Order deleted2 = vendor.DeleteOrder(order3.Id);
+
+      Assert.AreSame(order3, deleted2);
       CollectionAssert.AreEqual(
         new List<Order> { order1 },
         vendor.Orders
@@ -126,7 +130,9 @@ namespace Bakery.Tests
         vendor.Orders
       );
 
-      vendor.DeleteOrder(410321);
+      Order deleted = vendor.DeleteOrder(410321);
+
+      Assert.IsNull(deleted);
       CollectionAssert.AreEqual(
         new List<Order> { order1, },
         vendor.Orders
