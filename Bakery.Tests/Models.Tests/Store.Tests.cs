@@ -105,5 +105,125 @@ namespace Bakery.Tests
         store.Vendors
       );
     }
+    
+    [TestMethod]
+    public void CreateOrder_CreatesNewOrderWithProperties ()
+    {
+      Store store = new();
+      Vendor vendor = store.CreateVendor("vendor 1", "description");
+      Order order = store.CreateOrder(vendor.Id, "order 1", "order description");
+
+      Assert.AreEqual("order 1", order.Title);
+      Assert.AreEqual("order description", order.Description);
+      CollectionAssert.AreEqual(
+        new List<Order> { order },
+        store.Orders
+      );
+    }
+
+    [TestMethod]
+    public void CreateOrder_CreatesNewOrderWithProperties_OnlyAddsToCorrectVendor ()
+    {
+      Store store = new();
+      Vendor vendor1 = store.CreateVendor("vendor 1", "description");
+      Vendor vendor2 = store.CreateVendor("vendor 2", "description");
+      Order order = store.CreateOrder(vendor2.Id, "order 1", "order description");
+
+      CollectionAssert.AreEqual(
+        new List<Order> { order },
+        store.Orders
+      );
+      CollectionAssert.AreEqual(
+        new List<Order> {},
+        store.GetVendor(vendor1.Id).Orders
+      );
+      CollectionAssert.AreEqual(
+        new List<Order> { order },
+        store.GetVendor(vendor2.Id).Orders
+      );
+    }
+
+    [TestMethod]
+    public void GetOrder_FindAndReturnsOrderById_ReturnsCorrectOrder ()
+    {
+      Store store = new();
+      Vendor vendor1 = store.CreateVendor("vendor 1", "Description of Vendor");
+      Order order1 = store.CreateOrder(vendor1.Id, "order 1", "order description");
+      Order order2 = store.CreateOrder(vendor1.Id, "order 2", "order description");
+      Order order3 = store.CreateOrder(vendor1.Id, "order 2", "order description");
+
+      Assert.AreSame(order2, store.GetOrder(order2.Id));
+    }
+
+    [TestMethod]
+    public void GetOrder_FindAndReturnsOrderById_ReturnsNullIfNotFound ()
+    {
+      Store store = new();
+      Vendor vendor1 = store.CreateVendor("vendor 1", "Description of Vendor");
+      store.CreateOrder(vendor1.Id, "order 1", "order description");
+
+      Assert.IsNull(store.GetVendor(1123));
+    }
+
+    [TestMethod]
+    public void DeleteOrder_FindsAndDeletesOrderById_RemovesOrder ()
+    {
+      Store store = new();
+      Vendor vendor1 = store.CreateVendor("vendor 1", "Description of Vendor");
+      Order order1 = store.CreateOrder(vendor1.Id, "order 1", "description here");
+      Order order2 = store.CreateOrder(vendor1.Id, "order 2", "other description");
+
+      CollectionAssert.AreEqual(
+        new List<Order> { order1, order2 },
+        store.Orders
+      );
+
+      Order deleted1 = store.DeleteOrder(order2.Id);
+      
+      Assert.AreSame(order2, deleted1);
+      CollectionAssert.AreEqual(
+        new List<Order> { order1 },
+        store.Orders
+      );
+
+      Order deleted2 = store.DeleteOrder(order1.Id);
+
+      Assert.AreSame(order1, deleted2);
+      CollectionAssert.AreEqual(
+        new List<Order> {},
+        store.Orders
+      );
+    }
+
+    [TestMethod]
+    public void DeleteOrder_FindsAndDeletesOrderById_AlsoRemovesFromVendorOrders ()
+    {
+      Store store = new();
+      Vendor vendor1 = store.CreateVendor("vendor 1", "Description of Vendor");
+      Order order1 = store.CreateOrder(vendor1.Id, "order 1", "description here");
+      Order order2 = store.CreateOrder(vendor1.Id, "order 2", "other description");
+
+
+      Order deleted = store.DeleteOrder(order2.Id);
+      
+      CollectionAssert.AreEqual(
+        new List<Order> { order1 },
+        store.GetVendor(vendor1.Id).Orders
+      );
+    }
+
+    [TestMethod]
+    public void DeleteOrder_FindsAndDeletesOrderById_DoesNothingIfNotFound ()
+    {
+      Store store = new();
+      Vendor vendor1 = store.CreateVendor("vendor 1", "description here");
+      Order order1 = store.CreateOrder(vendor1.Id, "order 1", "description here");
+
+      Assert.IsNull(store.DeleteVendor(410321));
+      CollectionAssert.AreEqual(
+        new List<Order> { order1, },
+        store.Orders
+      );
+    }
   }
 }
