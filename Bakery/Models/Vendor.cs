@@ -1,13 +1,23 @@
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bakery.Models
 {
   public class Vendor
   {
     private static int NextId = 1;
+
     public int Id { get; private set; }
+
+    [Required()]
+    [DisplayName("Vendor Name")]
     public string Name { get; set; }
+
+    [DataType(DataType.MultilineText)]
+    [DisplayName("Description")]
     public string Description { get; set; }
+
     public List<Order> Orders { get; set; }
 
     public static void ResetIdCount ()
