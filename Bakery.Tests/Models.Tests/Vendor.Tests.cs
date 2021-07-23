@@ -49,7 +49,10 @@ namespace Bakery.Tests
     public void AddOrder_CreatesOrderAndAddsItToTheList_ReturnsOrder ()
     {
       Vendor vendor = new();
-      Order order = vendor.AddOrder("Test Order", "description here");
+      Order order = vendor.AddOrder(new Order(
+        "Test Order", 
+        "description here"
+      ));
 
       Assert.AreEqual("Test Order", order.Title);
       Assert.AreEqual("description here", order.Description);
@@ -64,9 +67,18 @@ namespace Bakery.Tests
     public void GetOrder_FindsAndReturnsOrderById_ReturnsCorrectOrder ()
     {
       Vendor vendor = new();
-      vendor.AddOrder("Test Order", "description here");
-      Order order2 = vendor.AddOrder("Test Order 2", "other description");
-      vendor.AddOrder("Test Order 3", "some other description");
+      vendor.AddOrder(new Order(
+        "Test Order", 
+        "description here"
+      ));
+      Order order2 = vendor.AddOrder(new Order(
+        "Test Order 2", 
+        "description here"
+      ));
+      vendor.AddOrder(new Order(
+        "Test Order 3", 
+        "description here"
+      ));
 
       Console.WriteLine(vendor.GetOrder(2).Id);
       Console.WriteLine(vendor.GetOrder(2).Title);
@@ -82,9 +94,10 @@ namespace Bakery.Tests
     public void GetOrder_FindsAndReturnsOrderById_ReturnsNullIfNotFound ()
     {
       Vendor vendor = new();
-      vendor.AddOrder("Test Order", "description here");
-      vendor.AddOrder("Test Order 2", "other description");
-      vendor.AddOrder("Test Order 3", "some other description");
+      vendor.AddOrder(new Order(
+        "Test Order", 
+        "description here"
+      ));
 
       Assert.IsNull(vendor.GetOrder(100));
     }
@@ -93,9 +106,18 @@ namespace Bakery.Tests
     public void DeleteOrder_FindsAndDeletesOrderById_RemovesOrder ()
     {
       Vendor vendor = new();
-      Order order1 = vendor.AddOrder("Test Order 1", "description here");
-      Order order2 = vendor.AddOrder("Test Order 2", "other description");
-      Order order3 = vendor.AddOrder("Test Order 3", "some other description");
+      Order order1 = vendor.AddOrder(new Order(
+        "Test Order", 
+        "description here"
+      ));
+      Order order2 = vendor.AddOrder(new Order(
+        "Test Order 2", 
+        "description here"
+      ));
+      Order order3 = vendor.AddOrder(new Order(
+        "Test Order 3", 
+        "description here"
+      ));
 
       CollectionAssert.AreEqual(
         new List<Order> { order1, order2, order3 },
@@ -123,7 +145,10 @@ namespace Bakery.Tests
     public void DeleteOrder_FindsAndDeletesOrderById_DoesNothingIfNotFound ()
     {
       Vendor vendor = new();
-      Order order1 = vendor.AddOrder("Test Order 1", "description here");
+      Order order1 = vendor.AddOrder(new Order(
+        "Test Order 1", 
+        "description here"
+      ));
 
       CollectionAssert.AreEqual(
         new List<Order> { order1 },

@@ -23,9 +23,8 @@ namespace Bakery.Models
       Id = NextId++;
     }
 
-    public Order AddOrder (string title = "", string description = "")
+    public Order AddOrder (Order order)
     {
-      Order order = new(title, description);
       Orders.Add(order);
       return order;
     }
