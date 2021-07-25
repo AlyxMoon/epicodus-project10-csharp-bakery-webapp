@@ -48,9 +48,11 @@ namespace Bakery.Controllers
 
     [HttpGet("orders")]
     [HttpGet("vendors/{vendorId}/orders")]
-    public ActionResult OrdersShowAll ()
+    public ActionResult OrdersShowAll (int vendorId)
     {
-      return View(BakeryStore.Orders);
+      if (vendorId == 0) return View(BakeryStore.Orders);
+
+      return View(BakeryStore.GetVendor(vendorId).Orders);
     }
 
     [HttpGet("vendors/{vendorId}/orders/new")]
