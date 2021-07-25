@@ -55,13 +55,14 @@ namespace Bakery.Controllers
     [HttpGet("vendors/{vendorId}/orders")]
     public ActionResult OrdersShowAll ()
     {
-      return View(BakeryStore);
+      return View(BakeryStore.Orders);
     }
 
     [HttpGet("vendors/{vendorId}/orders/new")]
-    public ActionResult OrderAddNew (int vendorId)
+    public ActionResult OrdersAddNew (int vendorId)
     {
-      return View(BakeryStore.GetVendor(vendorId));
+      ViewBag.VendorId = vendorId;
+      return View();
     }
 
     [HttpGet("orders/{orderId}")]

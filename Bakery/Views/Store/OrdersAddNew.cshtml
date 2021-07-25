@@ -1,0 +1,24 @@
+@using Bakery.Models
+@model Order
+@{
+  Layout = "_Layout";
+}
+
+<h1>Create a new order</h1>
+
+<form 
+  asp-controller="Store"
+  asp-action="OrdersCreate"
+  asp-route-vendorId="@ViewBag.VendorId"
+>
+  
+  <label asp-for="Title"></label>
+  <input asp-for="Title" required />
+
+  <label asp-for="Description"></label>
+  <textarea asp-for="Description"></textarea>
+
+  <div asp-validation-summary="All"></div>
+
+  <input type="submit">Create Order</input>
+</form>
