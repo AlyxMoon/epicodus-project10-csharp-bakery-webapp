@@ -11,11 +11,6 @@ namespace Bakery.Controllers
     [HttpGet]
     public ActionResult Index ()
     {
-      BakeryStore.CreateVendor("vendor 1", "test description");
-      BakeryStore.CreateVendor("vendor 2", "test description");
-      BakeryStore.CreateVendor("vendor 3", "test description");
-      BakeryStore.CreateVendor("vendor 4", "test description");
-
       return View(BakeryStore);
     }
 
