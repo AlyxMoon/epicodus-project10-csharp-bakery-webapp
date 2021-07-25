@@ -1,0 +1,55 @@
+
+body {
+  margin: 0;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+main {
+  padding: 20px 10px;
+}
+
+nav {
+  width: 100%;
+  padding: 0 10px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  
+  background: linear-gradient(30deg, #111111, #091823);
+  border-bottom: 3px solid #3FB0AC;
+}
+
+nav a {
+  color: #3FB0AC;
+  text-decoration: none;
+
+  transition: all 0.3s;
+}
+
+nav a:hover, nav:focus {
+  color: #47DAD5;
+}
+
+nav .brand {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  gap: 1rem;
+}
+
+nav .pull-right {
+  margin-left: auto;
+}

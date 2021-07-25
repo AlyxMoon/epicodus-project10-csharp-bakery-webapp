@@ -5,12 +5,37 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="~/css/style.css">
+  <link rel="stylesheet" href="~/css/main.css">
   <link rel="shortcut icon" href="~/img/favicon.ico" type="image/x-icon">
 
   <title>Bakery Inventory Tracking</title>
 </head>
 <body>
-  @RenderBody()
+  <nav>
+    <a href="/" class="brand">
+      <img src="~/img/favicon.ico" />
+      <h1>Home</h1>
+    </a>
+
+    <ul>
+      <li><a href="/store">Store Home</a></li>
+      <li><a href="/vendors">Vendors</a></li>
+      <li><a href="/orders">Orders</a></li>
+    </ul>
+
+    <ul class="pull-right">
+      <li>
+        <a 
+          href="https://github.com/AlyxMoon/epicodus-project10-csharp-bakery-webapp/"
+          target="_blank">
+          Github Repo
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    @RenderBody()
+  </main>
 </body>
 </html>
