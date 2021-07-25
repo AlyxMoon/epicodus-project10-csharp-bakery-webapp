@@ -11,6 +11,11 @@ namespace Bakery.Controllers
     [HttpGet]
     public ActionResult Index ()
     {
+      BakeryStore.CreateVendor("vendor 1", "test description");
+      BakeryStore.CreateVendor("vendor 2", "test description");
+      BakeryStore.CreateVendor("vendor 3", "test description");
+      BakeryStore.CreateVendor("vendor 4", "test description");
+
       return View(BakeryStore);
     }
 
@@ -39,7 +44,7 @@ namespace Bakery.Controllers
       return RedirectToAction("VendorsShowAll");
     }
 
-    [HttpPost("vendors/{vendorId}/delete")]
+    [HttpGet("vendors/{vendorId}/delete")]
     public ActionResult VendorsDelete (int vendorId)
     {
       BakeryStore.DeleteVendor(vendorId);
@@ -73,8 +78,8 @@ namespace Bakery.Controllers
       return RedirectToAction("OrdersShowAll");
     }
 
-    [HttpPost("orders/{orderId}/delete")]
-    [HttpPost("vendors/{vendorId}/orders/{orderId}/delete")]
+    [HttpGet("orders/{orderId}/delete")]
+    [HttpGet("vendors/{vendorId}/orders/{orderId}/delete")]
     public ActionResult OrdersDelete (int orderId)
     {
       BakeryStore.DeleteOrder(orderId);

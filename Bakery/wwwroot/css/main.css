@@ -53,3 +53,39 @@ nav ul {
 nav .pull-right {
   margin-left: auto;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+table tr {
+  border-bottom: 1px solid #000000AA;
+}
+
+table th, table td {
+  padding: 0.8em 0.4em;
+}
+
+.btn {
+  margin: 0.3em;
+  padding: 0.3em;
+
+  display: inline-flex;
+  
+  background-color: #CCCCCC;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  color: black;
+  font-family: sans-serif;
+  text-align: center;
+  text-decoration: none;
+
+  transition-duration: 0.3s;
+}
+
+.btn:hover {
+  background-color: #444444;
+  border: 1px solid #3FB0AC;
+  color: white;
+}
