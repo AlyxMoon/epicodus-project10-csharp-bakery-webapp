@@ -1,0 +1,20 @@
+@using Bakery.Models
+@model Vendor
+@{
+  Layout = "_Layout";
+}
+
+<h1>Vendor Details</h1>
+
+<ul>
+  <li>
+    <strong>Name:</strong>
+    @Model.Name
+  </li>
+  <li>
+    <strong>Description:</strong>
+    @Model.Description
+  </li>
+</ul>
+
+<partial name="_OrderTable" model="Model.Orders" />
