@@ -15,67 +15,70 @@ namespace Bakery.Controllers
     }
 
     [HttpGet("vendors")]
-    public ActionResult ShowVendors ()
+    public ActionResult VendorsShowAll ()
     {
-      return View("Index", BakeryStore);
+      return View(BakeryStore.Vendors);
     }
 
     [HttpGet("vendors/new")]
-    public ActionResult ShowCreateVendor ()
+    public ActionResult VendorsAddNew ()
     {
       return View();
     }
 
     [HttpGet("vendors/{vendorId}")]
-    public ActionResult ShowVendor (int vendorId)
+    public ActionResult VendorsSingleDetails (int vendorId)
     {
-      return View("Index", BakeryStore);
+      return View(BakeryStore.GetVendor(vendorId));
     }
 
     [HttpPost("vendors")]
-    public ActionResult CreateVendor (string name, string description)
+    public ActionResult VendorsCreate (string name, string description)
     {
       BakeryStore.CreateVendor(name, description);
-      return RedirectToAction("ShowVendors");
+      return RedirectToAction("VendorsShowAll");
     }
 
     [HttpPost("vendors/{vendorId}/delete")]
-    public ActionResult DeleteVendor (int vendorId)
+    public ActionResult VendorsDelete (int vendorId)
     {
-      return View("Index", BakeryStore);
+      BakeryStore.DeleteVendor(vendorId);
+      return RedirectToAction("VendorsShowAll");
     }
 
     [HttpGet("orders")]
     [HttpGet("vendors/{vendorId}/orders")]
-    public ActionResult ShowOrders (int vendorId)
+    public ActionResult OrdersShowAll ()
     {
-      return View("Index", BakeryStore);
+      return View(BakeryStore);
     }
 
     [HttpGet("vendors/{vendorId}/orders/new")]
-    public ActionResult ShowCreateOrder (int vendorId)
+    public ActionResult OrderAddNew (int vendorId)
     {
-      return View("Index", BakeryStore);
+      return View(BakeryStore.GetVendor(vendorId));
     }
 
     [HttpGet("orders/{orderId}")]
     [HttpGet("vendors/{vendorId}/orders/{orderId}")]
-    public ActionResult ShowOrder (int orderId)
+    public ActionResult OrdersSingleDetails (int orderId)
     {
-      return View("Index", BakeryStore);
+      return View(BakeryStore.GetOrder(orderId));
     }
 
     [HttpPost("vendors/{vendorId}/orders")]
-    public ActionResult CreateOrder (Order order)
+    public ActionResult OrdersCreate (int vendorId, string title, string description)
     {
-      return View("Index", BakeryStore);
+      BakeryStore.CreateOrder(vendorId, title, description);
+      return RedirectToAction("OrdersShowAll");
     }
 
     [HttpPost("orders/{orderId}/delete")]
     [HttpPost("vendors/{vendorId}/orders/{orderId}/delete")]
-    public ActionResult DeleteOrder (int orderId)
+    public ActionResult OrdersDelete (int orderId)
     {
-      return View("Index", BakeryStore);
+      BakeryStore.DeleteOrder(orderId);
+      return RedirectToAction("OrdersShowAll");
     }
   }
 }
