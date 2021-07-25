@@ -1,0 +1,18 @@
+@using Bakery.Models
+@model Order
+@{
+  Layout = "_Layout";
+}
+
+<h1>Order Details</h1>
+
+<ul>
+  <li>
+    <strong>Title:</strong>
+    @Model.Title
+  </li>
+  <li>
+    <strong>Description:</strong>
+    @Model.Description
+  </li>
+</ul>
