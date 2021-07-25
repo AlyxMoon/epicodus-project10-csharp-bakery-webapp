@@ -1,0 +1,9 @@
+@using System.Collections.Generic
+@using Bakery.Models
+@model List<Order>
+@{
+  Layout = "_Layout";
+}
+
+<h1>Orders</h1>
+<partial name="_OrderTable" model="Model" />
