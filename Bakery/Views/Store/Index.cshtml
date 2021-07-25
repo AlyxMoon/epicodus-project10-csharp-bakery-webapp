@@ -6,14 +6,9 @@
 
 <h1>Store Info Tracking</h1>
 
-@if (Model.Vendors.Count == 0)
-{
-  <p>There are no vendors yet.</p>
-}
-else
-{
-  <p>Vendors, yay!</p>
-}
+<h2>Vendors</h2>
+<a class="btn" href="/store/vendors/new">Create a Vendor</a>
+<partial name="_VendorTable" model="Model.Vendors" />
 
 @if (Model.Orders.Count == 0)
 {

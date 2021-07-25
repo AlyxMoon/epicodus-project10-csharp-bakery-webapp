@@ -5,42 +5,7 @@
   Layout = "_Layout";
 }
 
+<h1>Vendors</h1>
 <a class="btn" href="/store/vendors/new">Create a Vendor</a>
 
-<h1>Vendors</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Order Count</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (Vendor vendor in Model)
-    {
-      <tr>
-        <td>
-          <a class="btn" href="/store/vendors/@vendor.Id">
-            See Details
-          </a>
-          <a class="btn" href="/store/vendors/@vendor.Id/orders">
-            See Orders
-          </a>
-          <a class="btn" href="/store/vendors/@vendor.Id/orders/new">
-            Add Order
-          </a>
-          <a class="btn" href="/store/vendors/@vendor.Id/delete">
-            Delete
-          </a>
-        </td>
-        <td>@vendor.Id</td>
-        <td>@vendor.Name</td>
-        <td>@vendor.Description</td>
-        <td>@vendor.Orders.Count</td>
-      </tr>
-    }
-  </tbody>
-</table>
+<partial name="_VendorTable" model="Model" />
